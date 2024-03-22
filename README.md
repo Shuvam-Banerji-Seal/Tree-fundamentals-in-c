@@ -1,5 +1,5 @@
 
-**## Binary Search Tree Implementation in JavaScript**
+## Binary Search Tree Implementation in JavaScript
 
 This JavaScript code implements a Binary Search Tree (BST) with a user-friendly menu for performing various operations. The tree structure efficiently stores and retrieves numerical data while maintaining a sorted order.
 
