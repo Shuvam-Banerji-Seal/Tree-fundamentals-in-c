@@ -1,79 +1,211 @@
+# Binary Tree Operations in C
 
-## Binary Search Tree Implementation in JavaScript
+This C program implements operations on a binary tree, including insertion, deletion, searching, and various traversals such as inorder, preorder, postorder, and level order. The program allows users to interactively perform these operations through a menu-driven interface. Additionally, the program provides traversal information to assist users in understanding the different traversal techniques employed.
 
-This JavaScript code implements a Binary Search Tree (BST) with a user-friendly menu for performing various operations. The tree structure efficiently stores and retrieves numerical data while maintaining a sorted order.
+## Data Structures
 
-**Key Features:**
+### 1. `struct TreeNode`
+   - Description: Structure representing a node in the binary tree.
+   - Members:
+     - `val`: Integer value stored in the node.
+     - `left`: Pointer to the left child node.
+     - `right`: Pointer to the right child node.
 
-- User Menu: Interactively perform BST operations through a menu-driven interface.
-- Insertion: Add new nodes to the tree, maintaining the BST property.
-- Deletion: Remove nodes from the tree while preserving the BST order.
-- Search: Find specific nodes by their value.
-- Height Calculation: Determine the maximum level of nodes in the tree.
-- Traversals: Explore the tree using different traversal methods:
-    - Inorder: Visit left subtree, root, then right subtree.
-    - Preorder: Visit root, left subtree, then right subtree.
-    - Postorder: Visit left subtree, right subtree, then root.
-    - Level order: Visit nodes level by level, starting from the root.
-- Traversal Information: Provides descriptions of each traversal method.
+## Functions Overview
 
-**Getting Started:**
+### 1. `menu()`
+   - Description: Function to display a menu for user interaction and execute corresponding tree operations based on user input.
+   - Algorithm:
+     - The function continuously displays a menu of options for the user to choose from.
+     - It reads the user's choice and calls the respective function to perform the selected operation on the binary tree.
 
-1. **Prerequisites:** Basic understanding of JavaScript and data structures (trees).
-2. **Running the Code:**
-   - Save the code as a JavaScript file (e.g., `bst.js`).
-   - Open a terminal or command prompt and navigate to the directory containing the file.
-   - Run the code using Node.js: `node bst.js`
+### 2. `main()`
+   - Description: Main function to call the `menu()` function and start the program.
 
-**Code Structure:**
+### 3. `create(int data)`
+   - Description: Function to create a new tree node with the given data.
+   - Parameters:
+     - `data`: Integer value to be assigned to the new node.
+   - Returns: Pointer to the newly created node.
+   - Algorithm:
+     - Allocates memory for a new tree node.
+     - Initializes the node with the given data and sets its left and right pointers to NULL.
+     - Returns a pointer to the newly created node.
+   - Example:
+     ```c
+     struct TreeNode* node = create(10);
+     ```
 
-The code is well-structured with clear function definitions and comments, making it easy to understand and modify.
+### 4. `insert(int data)`
+   - Description: Function to insert a new node with the given data into the binary tree.
+   - Parameters:
+     - `data`: Integer value to be inserted into the tree.
+   - Algorithm:
+     - If the tree is empty, creates a new node and sets it as the root.
+     - Otherwise, performs a level-order traversal using a queue to find the appropriate position to insert the new node.
+     - Inserts the new node as the left child if the current node has no left child, or as the right child if it has no right child.
+   - Example:
+     ```c
+     insert(20);
+     ```
 
-**Explanation of Functions:**
+### 5. `delete(int key)`
+   - Description: Function to delete a node with the given key from the binary tree.
+   - Parameters:
+     - `key`: Integer value representing the node to be deleted from the tree.
+   - Algorithm:
+     - If the tree is empty, returns.
+     - Performs a level-order traversal using a queue to find the node with the given key.
+     - Replaces the data of the node to be deleted with the data of the deepest node in the tree.
+     - Deletes the deepest node and updates its parent's pointer accordingly.
+   - Example:
+     ```c
+     delete(15);
+     ```
 
-**1. `createNode(data)`:**
-   - Creates a new tree node with the given `data` value and initializes `left` and `right` child pointers to `null`.
+### 6. `search(int key)`
+   - Description: Function to search for a node with the given key in the binary tree.
+   - Parameters:
+     - `key`: Integer value representing the node to be searched for in the tree.
+   - Returns: `1` if the node is found, `-1` otherwise.
+   - Algorithm:
+     - If the tree is empty, returns -1.
+     - Performs a level-order traversal using a queue to search for the node with the given key.
+     - Returns 1 if the node is found, -1 otherwise.
+   - Example:
+     ```c
+     int result = search(25);
+     ```
 
-**2. `insert(data)`:**
-   - Recursively inserts a new node with the given `data` value into the BST, maintaining the sorted order.
+### 7. `height(struct TreeNode* root)`
+   - Description: Function to calculate the height of the binary tree.
+   - Parameters:
+     - `root`: Pointer to the root node of the tree.
+   - Returns: Height of the tree.
+   - Algorithm:
+     - If the tree is empty, returns 0.
+     - Recursively calculates the height of the left and right subtrees.
+     - Returns the maximum height among the left and right subtrees, plus 1.
+   - Example:
+     ```c
+     int treeHeight = height(root);
+     ```
 
-**3. `delete(data)`:**
-   - Searches for a node with the given `data` value and deletes it using appropriate BST deletion techniques.
+### 8. `inorder(struct TreeNode* root)`
+   - Description: Function to perform an inorder traversal of the binary tree.
+   - Parameters:
+     - `root`: Pointer to the root node of the tree.
+   - Algorithm:
+     - If the current node is NULL, returns.
+     - Recursively traverses the left subtree.
+     - Prints the value of the current node.
+     - Recursively traverses the right subtree.
+   - Example:
+     ```c
+     inorder(root);
+     ```
 
-**4. `search(data)`:**
-   - Recursively searches for a node with the given `data` value and returns `true` if found, `false` otherwise.
+### 9. `preorder(struct TreeNode* root)`
+   - Description: Function to perform a preorder traversal of the binary tree.
+   - Parameters:
+     - `root`: Pointer to the root node of the tree.
+   - Algorithm:
+     - If the current node is NULL, returns.
+     - Prints the value of the current node.
+     - Recursively traverses the left subtree.
+     - Recursively traverses the right subtree.
+   - Example:
+     ```c
+     preorder(root);
+     ```
 
-**5. `height(root)`:**
-   - Calculates the height (maximum level) of the BST recursively.
+### 10. `postorder(struct TreeNode* root)`
+   - Description: Function to perform a postorder traversal of the binary tree.
+   - Parameters:
+     - `root`: Pointer to the root node of the tree.
+   - Algorithm:
+     - If the current node is NULL, returns.
+     - Recursively traverses the left subtree.
+     - Recursively traverses the right subtree.
+     - Prints the value of the current node.
+   - Example:
+     ```c
+     postorder(root);
+     ```
 
-**6. `inorder(root)`:**
-   - Performs an inorder traversal, visiting the left subtree, root, and then the right subtree.
+### 11. `levelorder()`
+   - Description: Function to perform a level order traversal of the binary tree.
+   - Algorithm:
+     - If the tree is empty, prints "Tree is Empty!" and returns.
+     - Uses a queue to traverse the tree level by level.
+     - Prints the value of each node as it is visited.
+   - Example:
+     ```c
+     levelorder();
+     ```
 
-**7. `preorder(root)`:**
-   - Performs a preorder traversal, visiting the root, left subtree, and then the right subtree.
+### 12. `traversalInfo()`
+   - Description: Function to print traversal information explaining various traversal techniques.
+   - Algorithm:
+     - Prints information about four different types of tree traversals: inorder, preorder, postorder, and level order.
+   - Example:
+     ```c
+     traversalInfo();
+     ```
+## Additional Notes
 
-**8. `postorder(root)`:**
-   - Performs a postorder traversal, visiting the left subtree, right subtree, and then the root.
+- The program utilizes a queue data structure for level-order traversal, allowing efficient exploration of tree nodes level by level.
+- All functions are implemented with recursive algorithms to traverse or manipulate tree nodes.
+- It's important to manage memory properly, especially when allocating and deallocating memory for tree nodes using `malloc` and `free`.
 
-**9. `levelOrder(root)`:**
-   - Performs a level-order traversal, visiting nodes level by level from the root.
+## Example Usage
 
-**10. `menu()`:**
-   - Presents a menu with options for insertion, deletion, search, height calculation, traversals, and traversal information. Takes user input to execute the selected operation.
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
-**11. `traversalInfo()`:**
-   - Displays information about the different traversal methods.
+// Include the binary tree operations header file here
 
-**12. `main()`:**
-   - Calls the `menu()` function to start the user interaction.
+int main() {
+    // Create a new binary tree node with value 10
+    struct TreeNode* root = create(10);
 
-**Enhancements:**
+    // Insert new nodes into the binary tree
+    insert(20);
+    insert(15);
+    insert(25);
+    insert(5);
 
-- Error handling: Implement checks for invalid user input and provide appropriate error messages.
-- Efficiency improvements: Consider optimizations for specific operations, especially for large datasets.
-- Visualizations: Create visualizations of the BST for better understanding (optional).
+    // Perform various tree operations
+    printf("Height of the tree: %d\n", height(root));
+    printf("Inorder Traversal: ");
+    inorder(root);
+    printf("\nPreorder Traversal: ");
+    preorder(root);
+    printf("\nPostorder Traversal: ");
+    postorder(root);
+    printf("\nLevel Order Traversal: ");
+    levelorder();
 
-**Future Considerations:**
+    // Search for a node in the tree
+    int key = 15;
+    int result = search(key);
+    if (result == 1) {
+        printf("\nNode with value %d found in the tree.\n", key);
+    } else {
+        printf("\nNode with value %d not found in the tree.\n", key);
+    }
 
-- Balance checking: Implement mechanisms like AVL trees or red-black trees to maintain better balance for frequent insertions and deletions.
-- Generic data types: Modify the code to handle different data types stored in the nodes.
+    // Delete a node from the tree
+    delete(20);
+
+    // Print traversal information
+    printf("\nTraversal Information:\n");
+    traversalInfo();
+
+    return 0;
+}
+
+```
+## Conclusion
+This program provides a comprehensive set of operations for working with binary trees in C, including insertion, deletion, searching, and various traversal techniques. It serves as a useful reference for understanding and implementing binary tree algorithms efficiently.
